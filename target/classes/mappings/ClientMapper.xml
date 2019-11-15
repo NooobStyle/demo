@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.dao.mapper.ClientMapper">
+
+    <select id="get" resultMap="ClientMap">
+        SELECT
+            first_name,
+            last_name,
+            deleted
+        FROM client
+        WHERE id = #{id}
+    </select>
+
+    <insert id="save">
+        INSERT INTO client (
+            first_name,
+            last_name,
+            deleted
+        ) VALUES (
+            #{client.firstName},
+            #{client.lastName},
+            #{client.isDeleted}
+        )
+    </insert>
+
+    <resultMap id="ClientMap" type="com.demo.domain.model.Client">
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="isDeleted" column="deleted"/>
+    </resultMap>
+
+</mapper>
